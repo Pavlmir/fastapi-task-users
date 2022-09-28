@@ -1,4 +1,4 @@
-db/__pycache__
-core/__pycache__
-apps/__pycache__
-api/__pycache__
+db/__pycache__/
+core/__pycache__/
+apps/__pycache__/
+api/__pycache__/
