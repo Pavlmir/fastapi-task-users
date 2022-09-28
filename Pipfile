@@ -14,6 +14,9 @@ psycopg2 = "*"
 databases = "*"
 asyncpg = "*"
 python-multipart = "*"
+tortoise = "*"
+tortoise-orm = "*"
+loguru = "*"
 
 [dev-packages]
 autopep8 = "*"

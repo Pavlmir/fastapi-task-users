@@ -6,7 +6,7 @@
     Python 3.7+
     Flask/FastAPI
     PostgreSQL
-    SQLAlchemy/Asyncpg
+    SQLAlchemy/Asyncpg/Tortoise
     asyncio
 
 Задание из двух частей - попроще и посложнее. Обе части можно объединить.
