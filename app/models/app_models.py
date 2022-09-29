@@ -3,9 +3,6 @@ from tortoise import fields
 from app.models.base_models import IdDBModel
 from uuid import uuid4
 
-# from sqlalchemy import Column, String, DateTime, Boolean, Integer, ForeignKey, Enum as EnumSQL
-# from sqlalchemy.dialects.postgresql import UUID
-
 # from db.database import Model
 from enum import Enum
 
@@ -39,4 +36,4 @@ class Users(IdDBModel):
 class Tokens(IdDBModel):
     token = fields.UUIDField(index=True, default=uuid4)
     expires = fields.DatetimeField(auto_now_add=True)
-    user_id = fields.ForeignKeyField("models.Users", to_field="id")
+    user = fields.ForeignKeyField("models.Users", related_name="user_id")

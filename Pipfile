@@ -17,6 +17,8 @@ python-multipart = "*"
 tortoise = "*"
 tortoise-orm = "*"
 loguru = "*"
+pytest = "*"
+requests = "*"
 
 [dev-packages]
 autopep8 = "*"

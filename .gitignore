@@ -1,7 +1,9 @@
 .vscode/
-
-db/__pycache__/
-core/__pycache__/
-apps/__pycache__/
-apps/users/__pycache__/
-api/__pycache__/
+app/__pycache__/
+app/сore/__pycache__/
+app/models/__pycache__/
+app/repositories/__pycache__/
+app/routers/__pycache__/
+app/schemas/__pycache__/
+app/services/__pycache__/
+app/utils/__pycache__/

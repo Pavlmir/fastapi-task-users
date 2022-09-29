@@ -1,6 +1,13 @@
 {
     "configurations": [
         {
+            "name": "Python: модуль",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "justMyCode": true
+        },
+        {
             "name": "Python",
             "type": "python",
             "request": "launch",

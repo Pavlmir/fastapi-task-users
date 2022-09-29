@@ -12,7 +12,7 @@ from app.models.app_models import UserGender
 UsersPydantic = pydantic_model_creator(Users)
 
 
-class TokenBase(BaseModel):
+class TokenBasePydantic(BaseModel):
     token: UUID4 = Field(..., alias="access_token")
     expires: datetime
     token_type: Optional[str] = "bearer"
@@ -27,7 +27,7 @@ class TokenBase(BaseModel):
         return value.hex
 
 
-class UserBase(BaseModel):
+class UserBasePydantic(BaseModel):
     """ 
     Формирует тело ответа с деталями пользователя
     """
@@ -44,24 +44,24 @@ class UserBase(BaseModel):
         orm_mode = True  # TL;DR; помогает связать модель со схемой
 
 
-class UserCreate(UserBase):
+class UserCreatePydantic(UserBasePydantic):
     """ 
     Проверяется запрос на создание пользователя 
     """
     password: str
 
 
-class UserUpdate(UserBase):
+class UserUpdate(UserBasePydantic):
     id: int
 
 
-class UserToken(UserBase):
+class UserTokenPydantic(UserBasePydantic):
     """ 
     Пароль никогда не должен быть возвращен в ответе.
     Формирует тело ответа с деталями пользователя и токеном 
     """
     id: int
-    token: TokenBase = {}
+    token: TokenBasePydantic
 
     class Config:
         orm_mode = True  # TL;DR; помогает связать модель со схемой

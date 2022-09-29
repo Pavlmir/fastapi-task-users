@@ -1,5 +1,6 @@
 import time
 import json
+from pathlib import Path
 
 from fastapi import FastAPI, Request, Response
 from fastapi.staticfiles import StaticFiles
@@ -30,7 +31,7 @@ def create_application() -> FastAPI:
         allow_headers=["*"],
     )
 
-    app.mount("/static", StaticFiles(directory="static"), name="static")
+    app.mount("/static", StaticFiles(directory=Path(__file__).parent.parent / "static"), name="static")
     app.include_router(api_router)
 
     return app

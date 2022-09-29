@@ -46,6 +46,7 @@ class Settings(BaseSettings):
         env_prefix = ""  # prefix for env variables, defaults to no prefix, i.e. ""
         case_sensitive = True
 
+#TODO
 path_input = Path(__file__).parent.parent.parent / ".env"
 os.environ["SECRETS_PATH"] = str(path_input)
 
