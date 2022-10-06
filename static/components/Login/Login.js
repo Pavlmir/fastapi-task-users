@@ -5,7 +5,7 @@ class LoginPage {
         data.append('username', document.querySelector('#loginInput').value)
         data.append('password', document.querySelector('#loginPassword').value)
 
-        const response = await fetch(`/api/v1/users/login`, {
+        const response = await fetch(`/v1/login`, {
             method: 'POST',
             body: data
         });

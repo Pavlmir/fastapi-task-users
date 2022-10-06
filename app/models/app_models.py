@@ -12,21 +12,21 @@ class UserErrorsModel(str, Enum):
     email_exist = "Email already registered."
 
 
-class UserGender(str, Enum):
+class UserGenderType(str, Enum):
     male = "Мужчина"
     female = "Женщина"
     other = "Другой"
 
 
 class Users(IdDBModel):
-    name = fields.CharField(max_length=255, unique=True)
-    gender = fields.CharEnumField(enum_type=UserGender, default="Другой")
+    name = fields.CharField(max_length=255)
+    gender = fields.CharEnumField(enum_type=UserGenderType, default="Другой")
     email = fields.CharField(max_length=100, unique=True, index=True)
     hashed_password = fields.CharField(max_length=100)
     created_at = fields.DatetimeField(auto_now_add=True)
     age = fields.SmallIntField()
     description = fields.TextField()
-    is_admin = fields.BooleanField(default=False)
+    is_admin = fields.BooleanField(description="Является админом", default=False)
     is_active = fields.BooleanField(default=False)
 
     def __str__(self):
@@ -36,4 +36,4 @@ class Users(IdDBModel):
 class Tokens(IdDBModel):
     token = fields.UUIDField(index=True, default=uuid4)
     expires = fields.DatetimeField(auto_now_add=True)
-    user = fields.ForeignKeyField("models.Users", related_name="user_id")
+    user = fields.ForeignKeyField("models.Users", related_name="tokens_id")

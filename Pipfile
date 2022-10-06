@@ -19,6 +19,7 @@ tortoise-orm = "*"
 loguru = "*"
 pytest = "*"
 requests = "*"
+strawberry-graphql = {extras = ["fastapi"], version = "*"}
 
 [dev-packages]
 autopep8 = "*"

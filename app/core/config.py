@@ -39,7 +39,7 @@ class Settings(BaseSettings):
             password=values.get("DB_PASSWORD"),
             host=values.get("DB_HOST"),
             port=values.get("DB_PORT"),
-            path="/{0}".format(values.get("DB_NAME")),
+            path=f'/{values.get("DB_NAME")}',
         )
 
     class Config(object):

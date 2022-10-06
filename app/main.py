@@ -8,14 +8,16 @@ from fastapi.responses import FileResponse
 from loguru import logger as log
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn
+from strawberry.fastapi import GraphQLRouter
 
 from app.core.config import settings
 from app.core.db import init_db
 from app.routers.base_router import api_router
+from app.schemas.db_schemas import schema_graphql
 
 
 def create_application() -> FastAPI:
-    app = FastAPI(
+    app_fastapi = FastAPI(
         title="FastAPI Microservice with RESTful API and Clean Architecture",
         version="0.1.0",
         root_path=settings.API_ROOT_URL,
@@ -23,7 +25,7 @@ def create_application() -> FastAPI:
         redoc_url=None if settings.NODOC else "/redoc",
     )
 
-    app.add_middleware(
+    app_fastapi.add_middleware(
         CORSMiddleware,
         allow_origins=[origin for origin in settings.BACKEND_CORS_ORIGINS],
         allow_credentials=True,
@@ -31,10 +33,11 @@ def create_application() -> FastAPI:
         allow_headers=["*"],
     )
 
-    app.mount("/static", StaticFiles(directory=Path(__file__).parent.parent / "static"), name="static")
-    app.include_router(api_router)
+    app_fastapi.mount("/static", StaticFiles(directory=Path(__file__).parent.parent / "static"), name="static")
+    app_fastapi.include_router(api_router)
+    app_fastapi.include_router(GraphQLRouter(schema_graphql), prefix="/graphql")
 
-    return app
+    return app_fastapi
 
 
 app = create_application()
@@ -69,7 +72,7 @@ async def add_process_time_header(request: Request, call_next):
     response = await call_next(request)
     process_time = time.time() - start_time
 
-    if request.url.path == "/api/v1/users/login":
+    if request.url.path == "/v1/login":
         response_body = b''
         async for chunk in response.body_iterator:
             response_body += chunk

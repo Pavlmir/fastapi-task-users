@@ -1,10 +1,16 @@
 class ErrorPage {
-    render(response) {
+    async render(response) {
+        let detail = await response.json();
+        let textError = "";
+        detail.detail.forEach((element) => {
+          textError += element.msg + "<br>";
+        })
         let statusText = response.statusText
         let status = response.status
         ROOT_ERROR.innerHTML = String.raw`               
              <div class="cover-container d-flex w-90 h-100 p-3 mx-auto flex-column bg-light p-5 rounded mt-4">                
                 <main class="px-6" style="margin-left: 15%">
+                    <p>${textError}</p>
                     <h1>Page not found.</h1>
                     <p class="lead">The request URL was not found on the server. If you entered the URL manually please
                         check
